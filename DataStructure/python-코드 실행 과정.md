@@ -4,11 +4,10 @@
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/978532a2-dc23-4638-8639-74365af5c5c0)
 
 인터프리터 종류  
-
-PyPy가 CPython 보다 빠른 이유
 - CPython은 일반적인 인터프리터
 - PyPy는 JIT(Just In Time)를 겸비한 인터프리터
-- JIT는 인터프리터의 단점을 보완하기 위해 기계어 코드를 생성하면서 그 코드를 캐싱하여, 같은 함수가 여러 번 불릴 때 매번 기계어 코드를 생성하는 것을 방지
+  - JIT는 인터프리터의 단점을 보완하기 위해 기계어 코드를 생성하면서 그 코드를 캐싱하여, 같은 함수가 여러 번 불릴 때 매번 기계어 코드를 생성하는 것을 방지
+  - PyPy 가 Cpython 보다 빠름
 
 ## 인터프리터 작동 과정
 python 명령자를 전달함으로써 python interpreter가 trigger되고, source code가 전달된다.  
