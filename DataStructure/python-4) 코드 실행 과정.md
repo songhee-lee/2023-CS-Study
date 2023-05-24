@@ -14,7 +14,8 @@
 
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/bc5e1aef-f390-46f4-af98-e10eb77789e4)
 
-
+</br>
+</br>
 ## 파이썬 코드 실행 과정
 `.py` 로 작성된 파이썬 코드는 제일 먼저 **바이트 코드** 로 컴파일 되고, 바이트 코드는 **인터프리터**를 통해 실행된다.
 - 바이트 코드는 하드 디스크의 `.pyc' 파일에 저장  (__pycache__ 폴더 안에 생성)
@@ -24,7 +25,8 @@
   - 플랫폼에 의존적 : c 언어 / 소스 코드자체는 다르지 않지만, 최종 결과물이 윈도우에서는 `.exe` 파일 리눅스에서는 `.out` 파일
 
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/85c48b3c-cb14-4c5a-b43d-be0905030e79)
-
+</br>
+</br>
 ## 파이썬의 구현체
 파이썬 구현체는 인터프리터 안에 컴파일러를 내장하고 있다.
 - CPython
@@ -45,7 +47,8 @@
 - Jython
   - 파이썬 코드를 java bytecode로 만들어서 JVM 에서 실행될 수 있도록함
   - `.py` 파일을 `.class` 파일로 컴파일
-
+</br>
+</br>
 ## 파이썬 작동 방식
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/39f26a30-6803-4dcd-a724-09d1a9b3c00c)
 
