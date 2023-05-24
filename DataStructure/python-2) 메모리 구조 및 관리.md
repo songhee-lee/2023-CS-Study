@@ -152,6 +152,23 @@ del b # 0x02는 1로 감소한다.
 - `gc.set_threshold()` : 가비지 컬렉션 트리거 임계값 변경 가능
   - 임계 값을 증가시키면 가비지 컬렉션이 실행되는 빈도가 줄어든다.
   - 죽은 객체를 오래 유지하는 cost(비용)로 프로그램에서 계산 비용이 줄어든다.
+</br>
+
+### Manual Garbage Collection (수동 가비지 컬렉션)
+수동 메모리 관리는 컴퓨터 자원이 제한된 환경에 적합하다.
+　
+1. Time-based : 가비지 컬렉터를 고정된 시간 간격마다 호출
+2. Event-based : 이벤트 발생시 가비지 컬렉터 호출
+ ex) 사용자가 응용 프로그램 종료, 응용 프로그램이 중단 상태일 경우
+　　 
+### 주의사항 !
+GC를 수정하는 것보다 컴퓨터 자원을 증가시키는 편이 훨씬 좋다.  
+메모리를 확보하기 위해 수행하는 수동 가비지 컬렉션 프로세스는 원하지 않는 결과가 나올 수 있다.  
+ ㄴ python이 일반적으로 운영 체제 메모리를 다시 release 하지 않는다는 사실을 고려  
+레퍼런스 카운트는 비활성화할 수 없다.  
+먼저 Stackify's Retrace와 같은 툴로 응용 프로그램 성능 및 문제를 정확하게 파악하는 것이 중요하다.  
+문제를 파악했다면 다양한 튜닝을 통해 해결하면 된다.  
+Stackify's Retrace 사이트 : https://stackify.com/retrace/
 
 </br>
 
@@ -166,3 +183,4 @@ https://kadensungbincho.tistory.com/59
 # Reference
 [파이썬 메모리 공식문서] https://docs.python.org/ko/3/c-api/memory.html  
 https://medium.com/dmsfordsm/garbage-collection-in-python-777916fd3189  
+https://rushter.com/blog/python-memory-managment/
