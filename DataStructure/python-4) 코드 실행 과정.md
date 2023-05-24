@@ -1,6 +1,7 @@
 # 파이썬 
-## 인터프리터 언어, 컴파일 언어
+## 하이브리드 언어 (인터프리터 언어+ 컴파일 언어)
 파이썬은 부분 컴파일 언어이자, 인터프리터 언어이다.
+컴파일 언어처럼 하드웨어를 직접 제어하는 작업은 불가능
 
 |인터프리터 언어|컴파일 언어|
 |-------|--------|
@@ -19,7 +20,7 @@
 - 바이트 코드는 하드 디스크의 `.pyc' 파일에 저장  (__pycache__ 폴더 안에 생성)
 - PVM (Python Virtual Machine) : 인터프리터, 가상 머신
   - VM을 통해 '플랫폼에 독립적'인 장점을 가짐
-  - 플랫폼에 독립적 : python, java / 윈도우, 맥, 리눅스 어디서나 번역 및 실행이 가능
+  - 플랫폼에 독립적 : python, java(JVM), c#(.NET의 CLR) / 윈도우, 맥, 리눅스 어디서나 번역 및 실행이 가능
   - 플랫폼에 의존적 : c 언어 / 소스 코드자체는 다르지 않지만, 최종 결과물이 윈도우에서는 `.exe` 파일 리눅스에서는 `.out` 파일
 
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/85c48b3c-cb14-4c5a-b43d-be0905030e79)
@@ -46,59 +47,95 @@
   - `.py` 파일을 `.class` 파일로 컴파일
 
 ## 파이썬 작동 방식
-- Step 1. 파이썬 컴파일러가 소스 코드를 읽는다. 소스코드가 잘 작성 되었는지를 판단하기 위한 문법 오류 검사를 진행한다.
-   만약 문법 오류가 발견되었다면, 그 즉시 컴파일 과정을 멈추고 에러 메시지 출력
-- Step 2. 에러가 발생하지 않았다면 컴파일러가 소스 코드를 바이트 코드로 변환한다.
-- Step 3. 바이트 코드는 PVM에 보내진다. PVM은 바이트 코드를 컴퓨터가 실행할 수 있는 기계어로 한 줄 한 줄 (line by line) 번역한다.
-   만약 이 과정에서 에러가 발생하면 모든 것을 멈추고 에러 메시지 출력
-python 명령자를 전달함으로써 python interpreter가 trigger되고, source code가 전달된다.  
-Python interpreter의 작동 stages는   
-> **1. Lexing**
-> 전달된 code를 가지고 line을 쪼개 코드를 Token으로 generate  
+![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/39f26a30-6803-4dcd-a724-09d1a9b3c00c)
 
-> **2. Parsing**
-Generated token이 parser에게 전달되어 파싱됨  
-token을 가지고 Abstract Syntax Tree라는 token(code들)사이의 관계를 나타내는 트리 구조를 만듦  
+### Step 1.
+> 파이썬 컴파일러가 소스 코드를 읽는다.  
+> 소스코드가 잘 작성 되었는지를 판단하기 위한 문법 오류 검사를 진행한다.  
+> 만약 문법 오류가 발견되었다면, 그 즉시 컴파일 과정을 멈추고 에러 메시지 출력  
 
-> **3. Compiling**
-Parsed code(Abstract Syntax tree)가 compiler에게 전달되고, compiler가 이 Abstract Syntax Tree를 가지고 Byte code 라는 .pyc 형태의 intermediate language code를 생성됨
+</br>
 
-  - 자바 소스코드와의 차이점?  
-  - 자바코드는 interpreter에게 소스가 전달되기 전에 컴파일러에 의해 컴파일됨. 
-  - (compiler가 interpreter outside에 존재함. 파이썬은 인터프리터/컴파일러가 인터프리터 안에 함께 존재해서 performance lag를 줄임)
-
-4) Virtual Machine으로 .pyc가 전달되어 Interpreting 작업 수행  
-실제로 interpreting하는 stage. operating system을 simulate함.  
-byte code를 machine code로 변환함  
-![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/046bc01d-e10c-48d3-bc7e-c785b07b3d7c)
-
-
-### Exception이 raised되면 일어나는 일
-
-1. exception이 handled되기 전까지는 현재 block의 어떤 statements나 코드도 실행되지 않는다.  
-2. interpreter는 print-loop를 return 시켜주며, file argument로 파이썬이 시작된 경우에는? terminate한다.  
-3. python interpreter는 stack backtrace를 출력한다.
-stack-backtrace는 explanation이 담긴 텍스트 블록 집합으로, 예외가 발생한 실행분기에서 활성화되었던 function들의 call을 나타내는 branch 텍스트 블록 집합이다.  
-
-### 출력 방법
-traceback 이라는 python의 모듈이 있음.   
-파이썬 프로그램의 StackTrace를 추출, format, print하는 표준 인터페이스를 정의  
-
-traceback module은 traceback이라는 Object를 사용하는데, sys.last_traceback이라는 변수에 저장되고 sys.exc_info()라는 함수의 인자로 사용된다고 한다.  
-
-### sys module
-파이썬 런타임에 interpreter의 구성을 확인하고, 변경할 수 있는 서비스를 제공하는 모듈  
-프로그램 외부의 작업환경과 상호작용할 수 있는 서비스를 제공  
-
-ex) build time 버전 정보를 설정, 인터프리터를 빌드하는데 사용되는 운영체제 플랫폼을 정의  
-
-### 결론 => Traceback 로그가 출력되는 과정
-런타임환경 외부의 작업환경인 콘솔의 print와 상호작용하기 위해 sys.exc_info() 라는 함수의 인자에다가 traceback object로 생성된 객체를 전달해 로그가 전달   
+### Step 2. 컴파일러
+> 에러가 발생하지 않았다면 컴파일러가 소스 코드를 바이트 코드로 변환한다.
+>> **1. Lexing**  
+>> 전달된 코드를 가지고 라인을 쪼개 코드를 Token으로 일반화 한다.  
+>> 토큰 : 어휘 분석의 단위를 의미하는 컴퓨터 용어  
+>> </br>
+>> **2. Parsing**
+>> 토큰들이 parser에게 전달되어 데이터를 구조적으로 나타냄    
+>> 데이터를 구조적으로 바꾸는 과정에서 데이터가 올바른지 검증하는 역할도 수행함
+>> parser에 의해 도출된 결과가 AST의 모습을 보인다.
+>> AST (Abstract Syntax Tree) : 프로그래밍 언어로 쓰여진 소스코드의 Abstract Syntatic 구조를 표현하기 위해 사용되는 자료구조  
+>>  특정 프로그래밍 언어로 작성된 프로그램 소스를 각각 의미별로 분리하여 컴퓨터가 이해할 수 있는 구조로 변경시킨 트리  
+>> AST를 제어 흐름 그래프(Control FlowGraph)로 변환한다.    
+>> https://en.wikipedia.org/wiki/Abstract_syntax_tree
+>>  </br> 
+>> **3. Compiling**  
+>> AST가 컴파일러에게 전달되고, 컴파일러가 AST를 이용하여 ByteCode 라는 `.pyc` 형태의 `intermediate language code`를 생성한다.  
+>> 대화형 프롬프트(REPL) 환경에서 입력한 코드에 대해서는 `.pyc` 파일 생성 안함
 
 
+</br>
+
+### Step 3. PVM (Python Virual Machine)
+> 바이트 코드(`.pyc`)가 전달되어져서 python 코드가 실행되며 파이썬의 런타임 엔진이다.   
+> PVM은 바이트 코드를 컴퓨터가 실행할 수 있는 기계어로 한 줄 한 줄 (line by line) 번역한다.  
+> 실제 interpreting 작업을 담당하며, byte code를 기계어로 변환하여 실행되는 곳이다.  
+> Row 단위로 해석하며 프로그램을 구동하는 방식   
+> 만약 이 과정에서 에러가 발생하면 모든 것을 멈추고 에러 메시지 출력   
+
+</br>
+
+- 해당 과정에 대해 더 깊게 알고 싶으면 ? https://www.cs.columbia.edu/~suman/secure_sw_devel/Basic_Program_Analysis_CF.pdf 
+
+- 자바 소스코드와의 차이점?  
+  - 자바코드는 인터프리터에 소스가 전달되기 전에 컴파일러에 의해 컴파일됨. 
+  - 컴파일러가 인터프리터 밖에 존재함
+  - 파이썬은 인터프리터/컴파일러가 인터프리터 안에 함께 존재해서 performance lag을 줄임
+
+- Lexer->Parser의 간단한 예시
+```PYTHON
+입력값 : [1, [2,[3]], "he is tall"]
+
+
+토크나이저 결과 
+[ "1", "[2,[3]]", "['he', 'is', 'tall']"]
+
+렉서 결과 
+[
+	{type: 'number', value:"1" },
+	{type: 'array', value: "[2, [3]]"},
+	{type: 'array', value: "['he', 'is', 'tall']"},
+]
+
+파서 결과  
+{
+	type: 'array',
+	child: [
+		{type: 'number', value:'1', child:[] },
+		{type: 'array', 
+			child: [
+			{ type: 'number', value: '2', child:[] },
+			{ type: 'array', 
+				child:[ {type:'number', value:'3', child:[]}
+			]
+		}]
+		},
+		{type: 'array', 
+			child:[
+			{ type: 'string', value: 'he', child:[] },
+			{ type: 'string', value: 'is', child:[] },
+			{ type: 'string', value: 'tall', child:[] },
+			]
+		}]
+}
+```
 
 --------
 --------
 # Reference
 https://velog.io/@chldppwls12/python-%EB%8F%99%EC%9E%91-%EB%B0%A9%EC%8B%9D
 https://st-lab.tistory.com/176
+https://shrtorznzl.tistory.com/82
+https://ko.wikipedia.org/wiki/JIT_%EC%BB%B4%ED%8C%8C%EC%9D%BC
