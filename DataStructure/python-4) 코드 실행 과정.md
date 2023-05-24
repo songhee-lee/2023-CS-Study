@@ -49,7 +49,7 @@
 ## 파이썬 작동 방식
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/39f26a30-6803-4dcd-a724-09d1a9b3c00c)
 
-### Step 1.
+### Step 1. 소스코드
 > 파이썬 컴파일러가 소스 코드를 읽는다.  
 > 소스코드가 잘 작성 되었는지를 판단하기 위한 문법 오류 검사를 진행한다.  
 > 만약 문법 오류가 발견되었다면, 그 즉시 컴파일 과정을 멈추고 에러 메시지 출력  
@@ -139,3 +139,4 @@ https://velog.io/@chldppwls12/python-%EB%8F%99%EC%9E%91-%EB%B0%A9%EC%8B%9D
 https://st-lab.tistory.com/176
 https://shrtorznzl.tistory.com/82
 https://ko.wikipedia.org/wiki/JIT_%EC%BB%B4%ED%8C%8C%EC%9D%BC
+http://www.aistudy.co.kr/linguistics/natural/parsing.htm
