@@ -3,6 +3,13 @@
 `.py` 로 작성된 파이썬 코드는 제일 먼저 **바이트 코드** 로 컴파일 되고, 바이트 코드는 인터프리터를 통해 실행된다.
 ![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/978532a2-dc23-4638-8639-74365af5c5c0)
 
+인터프리터 종류  
+
+PyPy가 CPython 보다 빠른 이유
+- CPython은 일반적인 인터프리터
+- PyPy는 JIT(Just In Time)를 겸비한 인터프리터
+- JIT는 인터프리터의 단점을 보완하기 위해 기계어 코드를 생성하면서 그 코드를 캐싱하여, 같은 함수가 여러 번 불릴 때 매번 기계어 코드를 생성하는 것을 방지
+
 ## 인터프리터 작동 과정
 python 명령자를 전달함으로써 python interpreter가 trigger되고, source code가 전달된다.  
 Python interpreter의 작동 stages는   
@@ -132,10 +139,7 @@ GIL(Global Interpreter Lock)과 성능 문제
 - CPU의 영향이 큰 작업(CPU Bound)을 진행할 경우에는 멀티 프로세스를 활용하는 것을 권장
 - 파일 입출력, 네트워크 같은 입출력이 많은 작업(IO Bound)에 멀티 스레드를 사용하는 것이 적합
 
-PyPy가 CPython 보다 빠른 이유
-- CPython은 일반적인 인터프리터
-- PyPy는 JIT(Just In Time)를 겸비한 인터프리터
-- JIT는 인터프리터의 단점을 보완하기 위해 기계어 코드를 생성하면서 그 코드를 캐싱하여, 같은 함수가 여러 번 불릴 때 매번 기계어 코드를 생성하는 것을 방지
+
 
 메모리 누수가 발생할 수 있는 경우
 - 메서드 기본 인자 값으로 mutable 객체를 사용하고 있는 경우
