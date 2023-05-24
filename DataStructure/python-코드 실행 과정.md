@@ -1,5 +1,5 @@
-# 파이썬
-## 1. 컴파일 언어 + 인터프리터 언어
+# 파이썬 
+## 인터프리터 작동 과정
 `.py` 로 작성된 파이썬 코드는 제일 먼저 <span style="color:#0000FF">바이트 코드</span> 로 컴파일 되고, 바이트 코드는 인터프리터를 통해 실행된다.
 
 python 명령자를 전달함으로써 python interpreter가 trigger되고, source code가 전달된다.  
