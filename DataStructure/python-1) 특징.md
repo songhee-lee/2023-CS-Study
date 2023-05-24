@@ -1,10 +1,24 @@
-#### .pyc
-- .py 파일의 컴파일된 버전
-- 성능향상을 위해 자동으로 생성
-- PVM(Python Virual Machine)에 의해 실행되고, 지워도 되지만 성능 저하 가능성 있음
-  
+# 파이썬
+
+## 파이썬 장점
+- 객체지향 프로그래밍 : 상속 등과 함께 class(객체) 정의 허용
+- dynamically typed : 변수 사용 전 선언 필요 없음
+- 고급 언어 : 개발자의 생성산을 향상시키기 위해 여러 하위 수준의 세부 사항을 자동 처리
+- 동적 언어
+- 방대한 라이브러리 지원
+- 써드파티 모듈의 존재
+- 오픈소스이자 커뮤니티 개발 활발
+- 모든 운영체제에서 사용 가능
+
+## 파이썬 단점
     
-#### 파이썬 사용 사례
+GIL(Global Interpreter Lock)과 성능 문제
+- 여러 스레드가 동시에 실행되는 걸 막는다.
+- 덕분에 구현이 간단하고 레퍼런스 카운팅 오버헤드가 적음
+- 수행시간에 CPU의 영향이 큰 작업(압축, 정렬, 인코딩)을 멀티 스레드로 수행하면 GIL로 인하여 싱글 스레드일 때와 차이 X
+- CPU의 영향이 큰 작업(CPU Bound)을 진행할 경우에는 멀티 프로세스를 활용하는 것을 권장
+- 파일 입출력, 네트워크 같은 입출력이 많은 작업(IO Bound)에 멀티 스레드를 사용하는 것이 적합
+## 파이썬 사용 사례
 - 시스템 스크립팅
 - 웹 개발
 - 게임 개발
@@ -12,29 +26,10 @@
 - 복잡한 수학
 - 데이터 분석
 
-#### 파이썬의 혜택
-- 객체지향 프로그래밍
-- 고급 언어
-- 동적 언어
-- 방대한 라이브러리 지원
-- 써드파티 모듈의 존재
-- 오픈소스이자 커뮤니티 개발
-- 기종간 사용할 수 있고 상호교환적
-- 모든 운영체제에서 사용 가능
+## 파이썬 interview Questions 2023 top 100
+https://intellipaat.com/blog/interview-question/python-interview-questions/?US  
 
-#### PEP 8
-- 파이썬 스타일 가이드, 문서
-- 파이썬 코드를 잘 작성하기 위한 가이드라인과 모범 사례 제공
-- 읽기 쉽고 눈에 보기 좋은 코딩 스타일 장려
-
-
----------
----------
-
-### 주요 특징
-- interpreted language : 실행 전 컴파일 필요 없음
-- dynamically typed : 변수 사용 전 선언 필요 없음
-- 객체지향적 프로그래밍 : 상송 등과 함께 class(객체) 정의 허용
+- 객체지향적 프로그래밍 
 - 함수가 first-class object : 변수에 할당 가능, 다른 함수에서 반환 및 전달 가능
 
 - Scripting : 자동화 가능 / 주어진 데이터에서 정보 제공
@@ -72,38 +67,6 @@ Generator
 - 인스턴스의 메서드를 실행한다고 가정할 때 __getattribute__()로 bound 된 method 를 가져온 후 메서드를 실행
 - 상속할때 왼쪽에 가까운 순서대로 우선순위가 높음
 
-GIL(Global Interpreter Lock)과 성능 문제
-- 여러 스레드가 동시에 실행되는 걸 막는다.
-- 덕분에 구현이 간단하고 레퍼런스 카운팅 오버헤드가 적음
-- 수행시간에 CPU의 영향이 큰 작업(압축, 정렬, 인코딩)을 멀티 스레드로 수행하면 GIL로 인하여 싱글 스레드일 때와 차이 X
-- CPU의 영향이 큰 작업(CPU Bound)을 진행할 경우에는 멀티 프로세스를 활용하는 것을 권장
-- 파일 입출력, 네트워크 같은 입출력이 많은 작업(IO Bound)에 멀티 스레드를 사용하는 것이 적합
-
-
-
-메모리 누수가 발생할 수 있는 경우
-- 메서드 기본 인자 값으로 mutable 객체를 사용하고 있는 경우
-클래스 내 __del__ 메서드를 재정의 하는 경우
-Duck Typing
-Duck typing이란 특히 동적 타입을 가지는 프로그래밍 언어에서 많이 사용되는 개념으로, 객체의 실제 타입보다는 객체의 변수와 메소드가 그 객체의 적합성을 결정하는 것을 의미한다. 하나의 외부 메서드를 통해서 서로 다른 객체의 인자의 같은 이름의 메서드를 호출할 수 있다.
-
-
-
-
-
-
-### 그 외 참고사항
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/77333e85-d494-46cd-8c7b-5916d1452dbb)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/6f43e1c2-5868-4738-9cc0-c144fd24af0d)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/8f7d4faa-4e31-4749-840f-dc8aeafe4dbb)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/a0d2a172-7f28-4422-b539-cd1c224495fb)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/923dfee1-66fa-4647-b567-2e51d363cacd)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/9a7f85f6-043f-4150-9d97-cb5928062649)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/ae188612-1e09-43d2-a1ab-10df46f72dec)
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/14d1bc25-c639-4a67-8c48-9e3a9fb55e7c)
-
-namespace
-- 이름 충돌 피하기 위해 고유한 이름인지 확인하는 이름 지정 시스템
 
 list 와 tuple 의 차이
 - list : 가변성, 더 많은 메모리 소모(더 느림)
