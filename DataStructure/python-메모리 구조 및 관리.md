@@ -40,3 +40,6 @@ Python 나갈 때 왜 모든 memory가 할당 해제되지 않는지?
 Shallow / Deep copy
 - Shallow copy : 새로운 instance가 생성될 때 사용
 - Deep copy : 이미 복사된 값 저장할 때 사용
+
+## 파이썬 리스트/배열/튜플/클래스 내부구조 및 메모리 할당
+https://kadensungbincho.tistory.com/59
