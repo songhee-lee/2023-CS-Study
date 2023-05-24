@@ -76,8 +76,8 @@
 >> parser에 의해 도출된 결과가 AST의 모습을 보인다.
 >> AST (Abstract Syntax Tree) : 프로그래밍 언어로 쓰여진 소스코드의 Abstract Syntatic 구조를 표현하기 위해 사용되는 자료구조  
 >>  특정 프로그래밍 언어로 작성된 프로그램 소스를 각각 의미별로 분리하여 컴퓨터가 이해할 수 있는 구조로 변경시킨 트리  
->> AST를 제어 흐름 그래프(Control FlowGraph)로 변환한다.    
->> https://en.wikipedia.org/wiki/Abstract_syntax_tree
+>> AST를 제어 흐름 그래프(Control FlowGraph)로 변환한다.     
+>> https://en.wikipedia.org/wiki/Abstract_syntax_tree  
 >>  </br> 
 >> **3. Compiling**  
 >> AST가 컴파일러에게 전달되고, 컴파일러가 AST를 이용하여 ByteCode 라는 `.pyc` 형태의 `intermediate language code`를 생성한다.  
