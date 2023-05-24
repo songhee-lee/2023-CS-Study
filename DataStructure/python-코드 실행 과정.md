@@ -9,6 +9,9 @@
   - JIT는 인터프리터의 단점을 보완하기 위해 기계어 코드를 생성하면서 그 코드를 캐싱하여, 같은 함수가 여러 번 불릴 때 매번 기계어 코드를 생성하는 것을 방지
   - PyPy 가 Cpython 보다 빠름
 
+
+
+
 ## 인터프리터 작동 과정
 python 명령자를 전달함으로써 python interpreter가 trigger되고, source code가 전달된다.  
 Python interpreter의 작동 stages는   
