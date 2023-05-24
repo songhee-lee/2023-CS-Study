@@ -122,21 +122,47 @@ del b # 0x02는 1로 감소한다.
 
 ### 2. 세대별 가비지 컬렉션 (Generational Garbage Collection)
 - 레퍼런스 카운팅이 주로 사용되는 방법, 보조로 GC 사용
-- 가비지 컬렉터는 세대와 임계값을 통해 가비지 컬렉션의 주기 관리
+- 가비지 컬렉터는 세대(generation)와 임계값(threshold)을 통해 가비지 컬렉션 주기와 객체를 관리한다.
+  - 세대는 0~2세대로 구분되고 최근 생성된 객체는 0세대(young)에 들어가고 오래된 객체일수록 2세대(old)로 이동한다.
+  - 한 객체는 단 하나의 세대에만 속한다.
+  - 0세대일수록 더 자주 가비지 컬렉션을 하도록 설계되어 있는데 generational hypothesis에 근거한다.  
+    (https://plumbr.io/handbook/garbage-collection-in-java/generational-hypothesis)
+  - python 가비지 수집기는 총 3세대이며, 객체는 현재 세대의 가비지 수집 프로세스에서 살아 남을때마다 이전 세대로 이동한다.
+  - 각 세대마다 가비지 컬렉터 모듈에는 임계값 개수의 개체가 있다.
+  - 객체 수가 해당 임계값을 초과하면 가비지 콜렉션이 콜렉션 프로세스를 trigger(추적)한다.
+  - 해당 프로세스에서 살아남은 객체는 이전 세대로 이동한다.
 
-- 새로운 객체가 만들어 질 때 파이썬은 _PyObject_GC_Alloc() 호출
-- 객체를 메모리에 할당하고 가비지 컬렉션을 진행한다.
+- python 프로그램에서 세대 가비지 컬렉터의 동작을 변경할 수 있다.
+- 'garbage collection process를 trigger 하기 위한 임계값 변경', '가비지 컬렉션 프로세스를 수동으로 trigger 하는 것', '가비지 컬렉션 프로세스를 모두 비활성화하는 것' 가능
+</br>
 
-Python 나갈 때 왜 모든 memory가 할당 해제되지 않는지?
-- C에서 예약된 메모리 할당 해제는 불가능
+### GC가 성능에 영향을 주는 이유?
+- GC를 수행하려면 응용 프로그램을 완전히 중지해야 한다. 그러므로 객체가 많을수록 모든 가비지를 수집하는 데 시간이 오래 걸린다는 것을 의미한다.
+- GC 주기가 짧다면 응용 프로그램이 중지되는 상황이 증가하고 반대로 주기가 길어진다면 메모리 공간에 garbage가 많이 쌓이게 된다.
+- 이는 시행착오를 거치며 응용 프로그램의 성능을 끌어 올려야 한다.
+</br>
 
-Shallow / Deep copy
-- Shallow copy : 새로운 instance가 생성될 때 사용
-- Deep copy : 이미 복사된 값 저장할 때 사용
+### GC module 사용 :: `import gc`
+- `gc.get_threshold()` : 가비지 컬렉터의 구성된 임계값 확인
+  - 결과 : (threshold 0, threshold 1, threshold 2)
+  - 해석 : n세대에 객체를 할당한 횟수가 threshold n을 초과하면 가비지 컬렉션이 수행된다.
+- `gc.get_count()` : 각 세대의 객체 수 확인
+- `gc.collect()` : 수동 가비지 콜렉션 프로세스 추적
+  - 파이썬은 프로그램을 시작하기 전에 기본적으로 많은 객체를 생성하므로 한 번 실행해주면 객체가 정리된다.
+- `gc.set_threshold()` : 가비지 컬렉션 트리거 임계값 변경 가능
+  - 임계 값을 증가시키면 가비지 컬렉션이 실행되는 빈도가 줄어든다.
+  - 죽은 객체를 오래 유지하는 cost(비용)로 프로그램에서 계산 비용이 줄어든다.
 
+</br>
+
+</br>
+
+
+-----------
 ## 파이썬 리스트/배열/튜플/클래스 내부구조 및 메모리 할당
 https://kadensungbincho.tistory.com/59
 
 
 # Reference
-[파이썬 메모리 공식문서] https://docs.python.org/ko/3/c-api/memory.html
+[파이썬 메모리 공식문서] https://docs.python.org/ko/3/c-api/memory.html  
+https://medium.com/dmsfordsm/garbage-collection-in-python-777916fd3189  
