@@ -1,16 +1,19 @@
 # 파이썬 
-## 인터프리터 작동 과정
-`.py` 로 작성된 파이썬 코드는 제일 먼저 <span style="color:#0000FF">바이트 코드</span> 로 컴파일 되고, 바이트 코드는 인터프리터를 통해 실행된다.
+## 코드 실행 과정
+`.py` 로 작성된 파이썬 코드는 제일 먼저 **바이트 코드** 로 컴파일 되고, 바이트 코드는 인터프리터를 통해 실행된다.
+![image](https://github.com/0sun-creater/2023-CS-Study/assets/54173210/978532a2-dc23-4638-8639-74365af5c5c0)
 
+## 인터프리터 작동 과정
 python 명령자를 전달함으로써 python interpreter가 trigger되고, source code가 전달된다.  
 Python interpreter의 작동 stages는   
-1) Lexing
-전달된 code를 가지고 line을 쪼개 코드를 Token으로 generate  
-2) Parsing
+> **1. Lexing**
+> 전달된 code를 가지고 line을 쪼개 코드를 Token으로 generate  
+
+> **2. Parsing**
 Generated token이 parser에게 전달되어 파싱됨  
 token을 가지고 Abstract Syntax Tree라는 token(code들)사이의 관계를 나타내는 트리 구조를 만듦  
-![image](https://github.com/songhee-lee/2023-CS-Study/assets/54173210/a6a96b04-348a-4ee1-8428-337be60f819a)
-3) Compiling
+
+> **3. Compiling**
 Parsed code(Abstract Syntax tree)가 compiler에게 전달되고, compiler가 이 Abstract Syntax Tree를 가지고 Byte code 라는 .pyc 형태의 intermediate language code를 생성됨
 
   - 자바 소스코드와의 차이점?  
