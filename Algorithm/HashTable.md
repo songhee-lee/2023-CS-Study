@@ -1,5 +1,9 @@
 ## Hash Table 실사용예시
 
+### 표로 정리
+
+![img](https://github.com/songhee-lee/2023-CS-Study/assets/104298444/3eefeefb-d14b-488b-a793-849e90358ad9)
+
 ### 노래방 책
 
 ![img](https://github.com/songhee-lee/2023-CS-Study/assets/104298444/9b4636ab-e3c6-459c-9b07-3b6ef7168783)
@@ -247,3 +251,142 @@ apple 또는 pizza의 가격을 찾을 때까지 찾는다
 암호 하나를 찾는 시간을 10만 배 늘리고, 테이블을 10만 분의 1로 줄이기
 
 해시함수는 10만 배 느려봤자 밀리초 단위이고, 레인보우 테이블에 저장되는 값 대비 찾을 암호의 숫자가 매우 적어서 굿
+
+### 해시 충돌을 해결하는 방법(추가)
+
+![image](https://github.com/songhee-lee/2023-CS-Study/assets/104298444/8b420437-0a36-4b39-94ea-c38ecdc2dfce)
+
+충돌이 발생하면 해당 버킷(해시 테이블의 총 칸)을 링크드리스트로 연결함
+c++이나 자바와 같은 언어에서 주로 사용
+<code>
+
+<pre>
+//자바 예시 코드
+import java.util.LinkedList;
+
+class Node {
+    String key;
+    int value;
+
+    public Node(String key, int value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+
+class HashTable {
+    private int size;
+    private LinkedList<Node>[] table;
+
+    public HashTable(int size) {
+        this.size = size;
+        this.table = new LinkedList[size];
+        for (int i = 0; i < size; i++) {
+            table[i] = new LinkedList<>();
+        }
+    }
+
+    private int hashFunction(String key) {
+        // 간단한 해시 함수 예시: 문자열의 각 문자의 아스키 값을 더한 후, 크기로 나눈 나머지 반환
+        int hash = 0;
+        for (char c : key.toCharArray()) {
+            hash += (int) c;
+        }
+        return hash % size;
+    }
+
+    public void put(String key, int value) {
+        int index = hashFunction(key);
+        LinkedList<Node> list = table[index];
+        for (Node node : list) {
+            if (node.key.equals(key)) {
+                node.value = value;
+                return;
+            }
+        }
+        list.add(new Node(key, value));
+    }
+
+    public Integer get(String key) {
+        int index = hashFunction(key);
+        LinkedList<Node> list = table[index];
+        for (Node node : list) {
+            if (node.key.equals(key)) {
+                return node.value;
+            }
+        }
+        return null;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashTable hashTable = new HashTable(10);
+
+        // 데이터 추가
+        hashTable.put("apple", 5);
+        hashTable.put("banana", 10);
+        hashTable.put("orange", 7);
+
+        // 데이터 조회
+        System.out.println(hashTable.get("apple"));   // 5
+        System.out.println(hashTable.get("banana"));  // 10
+        System.out.println(hashTable.get("orange"));  // 7
+        System.out.println(hashTable.get("grape"));   // null (존재하지 않는 키)
+
+        // 데이터 업데이트
+        hashTable.put("apple", 3);
+        System.out.println(hashTable.get("apple"));   // 3
+    }
+}
+
+</code>
+</pre>
+
+![image](https://github.com/songhee-lee/2023-CS-Study/assets/104298444/3b9841d4-2e67-4274-b2d4-3090a00cab1d)
+
+<code>
+<pre>
+//파이썬 예시 코드
+class HashTable:
+    def __init__(self, size):
+        self.size = size
+        self.keys = [None] * size
+        self.values = [None] * size
+
+    def hash_function(self, key):
+        # 간단한 해시 함수 예시: 문자열의 각 문자의 아스키 값을 더한 후, 크기로 나눈 나머지 반환
+        return sum(ord(c) for c in key) % self.size
+
+    def put(self, key, value):
+        index = self.hash_function(key)
+        while self.keys[index] is not None:
+            if self.keys[index] == key:
+                self.values[index] = value
+                return
+            index = (index + 1) % self.size
+        self.keys[index] = key
+        self.values[index] = value
+
+    def get(self, key):
+        index = self.hash_function(key)
+        while self.keys[index] is not None:
+            if self.keys[index] == key:
+                return self.values[index]
+            index = (index + 1) % self.size
+        return None
+
+</code>
+</pre>
+
+![image](https://github.com/songhee-lee/2023-CS-Study/assets/104298444/28da95e2-a666-43ec-a260-6d98038166e9)
+
+![image](https://github.com/songhee-lee/2023-CS-Study/assets/104298444/cfacdb69-d5ad-4de7-b8ce-4ecfa09950c2)
+
+### 파이썬 딕셔너리에서 사용하는 해시 함수는 무엇인가?
+
+- hash()함수를 사용함
+
+- 정수타입은 정수로 반환, 문자열 타입은 내용을 해시하여 정수 값 반환, 튜플타입은 순서대로 해시하여 정수값으로 계산
+
+- 사용자가 만든 클래스의 인스턴스같이 해시 불가능한 객체는 'TypeError'발생, 사용하려면 직접 hash매서드를 구현해야 함
